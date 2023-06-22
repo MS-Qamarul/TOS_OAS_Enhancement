@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import os
 
-# Value to darken image - make changes if necessary
-alpha_value = 155.0 # 155.0 is optimal value so far
+# Value to darken image
+alpha_value = 155.0 # 155.0 is optimal value so far <<< CHANGE THIS IF NECESSARY
 
 def enhance_contrast(image):
     # Convert the image to grayscale
@@ -30,6 +30,20 @@ def convert_tif_to_png(input_path, output_path):
 # Folders
 input_folder = "01_Input"
 output_folder = "02_Output"
+
+# Check whether directory already exists
+if not os.path.exists(input_folder):
+    os.mkdir(input_folder)
+    print("Folder %s created!" % input_folder)
+else:
+    print("Folder %s already exists" % input_folder)
+
+# Check whether directory already exists
+if not os.path.exists(output_folder):
+    os.mkdir(output_folder)
+    print("Folder %s created!" % output_folder)
+else:
+    print("Folder %s already exists" % output_folder)
 
 # Iterate over TIF files in the input folder
 for filename in os.listdir(input_folder):
