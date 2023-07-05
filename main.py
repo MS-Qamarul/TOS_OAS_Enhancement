@@ -2,10 +2,11 @@ import cv2
 import numpy as np
 import os
 
-# Value to darken image
+# Adjustable values to darken or lighten image for enhance_contrast
 alpha_value = 175.0 # 175.0 is optimal value so far <<< CHANGE THIS IF NECESSARY
 value_2 = 0.0 # 0.0 is optimal value so far <<< CHANGE THIS IF NECESSARY
 
+# Define enhance_contrast
 def enhance_contrast(image):
     # Convert the image to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -18,6 +19,7 @@ def enhance_contrast(image):
 
     return stretched
 
+# Define process_to_tiff (or whatever image format you want to convert to)
 def process_to_tif(input_path, output_path):
     # Read the TIF image
     image = cv2.imread(input_path)
@@ -31,6 +33,8 @@ def process_to_tif(input_path, output_path):
 # Folders
 input_folder = "01_Input"
 output_folder = "02_Output"
+
+print("=============== START ===============")
 
 # Check whether directory already exists
 if not os.path.exists(input_folder):
@@ -48,8 +52,10 @@ else:
 
 # Iterate over TIF files in the input folder
 for filename in os.listdir(input_folder):
-    if filename.endswith(".tif"):
-        input_path = os.path.join(input_folder, filename)
-        output_path = os.path.join(output_folder, filename[:-4] + ".tif")  # Change file extension to PNG
-        print(filename[:-4] + ".tif created!")
-        process_to_tif(input_path, output_path)
+        if filename.endswith(".tif"):
+            input_path = os.path.join(input_folder, filename)
+            output_path = os.path.join(output_folder, filename[:-4] + ".tif") # Set file extension
+            print(filename[:-4] + ".tif created!")
+            process_to_tif(input_path, output_path)
+
+print("=============== END ===============")
